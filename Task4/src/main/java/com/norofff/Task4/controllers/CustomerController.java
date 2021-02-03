@@ -22,6 +22,11 @@ public class CustomerController {
         return customerRepository.getCustomerById(id);
 }
 
+    // Get customer && country
+    @RequestMapping(value = "/api/main/Customer/{country}", method = RequestMethod.GET)
+    public String getCustomerByCountry(@PathVariable String country)
+    {return customerRepository.getCustomerByCountry(country);}
+
     @RequestMapping(value = "/api/main/Customer", method = RequestMethod.POST)
     public Boolean addCustomer(@RequestBody Customer customer) {
         return customerRepository.addCustomer(customer);
