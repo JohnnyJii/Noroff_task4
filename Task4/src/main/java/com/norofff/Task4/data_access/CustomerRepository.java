@@ -18,9 +18,16 @@ public class CustomerRepository {
         ArrayList<Customer> customers = new ArrayList<>();
         try {
             conn = DriverManager.getConnection(URL);
-
             PreparedStatement preparedStatement =
-                    conn.prepareStatement("Select CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer");
+                    conn.prepareStatement("Select " +
+                            "CustomerId, " +
+                            "FirstName, " +
+                            "LastName, " +
+                            "Country, " +
+                            "PostalCode, " +
+                            "Phone, " +
+                            "Email " +
+                            "FROM Customer");
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -49,24 +56,30 @@ public class CustomerRepository {
         return customers;
     }
 
+    /*
     // get all customers by id
-    public Customer getCustomerById(String customerID) {
-        Customer customer = null;
+    public Customer getCustomerById() {
+        ArrayList<CustomerById> customersById = new ArrayList<>();
 
         try {
             conn = DriverManager.getConnection(URL);
             PreparedStatement preparedStatement =
                     conn.prepareStatement("Select " +
-                            "CustomerId, FirstName, LastName, Country, " +
-                            "PostalCode, Phone, Email " +
+                            "CustomerId, " +
+                            "FirstName, " +
+                            "LastName, " +
+                            "Country, " +
+                            "PostalCode, " +
+                            "Phone, " +
+                            "Email " +
                             "FROM Customer " +
                             "Where customerId = ?");
-            preparedStatement.setString(1, customerID);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                customer = new Customer(
+                customersById.add(
+                        new CustomerById(
                         resultSet.getString("CustomerId"),
                         resultSet.getString("FirstName"),
                         resultSet.getString("LastName"),
@@ -74,10 +87,11 @@ public class CustomerRepository {
                         resultSet.getString("PostalCode"),
                         resultSet.getString("Phone"),
                         resultSet.getString("Email")
-                );
+                ));
             }
         }
         catch (Exception exception) {
+            System.out.println(exception.getMessage()
         }
         finally {
             try {
@@ -88,6 +102,8 @@ public class CustomerRepository {
         }
         return customer;
     }
+
+     */
 
     // get customers by country
     public String getCustomerByCountry(String country) {

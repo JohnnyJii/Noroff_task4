@@ -19,13 +19,13 @@ public class CustomerController {
         return customers;
     }
 
-
-
+    /*
     // Get customer by id
     @RequestMapping(value = "/api/main/Customer/{id}", method = RequestMethod.GET)
     public Customer getCustomerById(@PathVariable String id) {
         return customerRepository.getCustomerById(id);
 }
+     */
 
     // Get customer && country
     @RequestMapping(value = "/api/main/Customer/{country}", method = RequestMethod.GET)
