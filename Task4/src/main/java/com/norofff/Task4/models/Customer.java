@@ -2,7 +2,6 @@
 package com.norofff.Task4.models;
 
 public class Customer {
-    private String Customer;
     private String CustomerId;
     private String FirstName;
     private String LastName;
@@ -15,8 +14,8 @@ public class Customer {
 
     }
 
-    public Customer(String customer, String customerId, String firstName, String lastName, String country, String postalCode, String phone, String email) {
-        this.Customer = customer;
+    public Customer(String customerId, String firstName, String lastName, String country, String postalCode, String phone, String email) {
+
         this.CustomerId = customerId;
         this.FirstName = firstName;
         this.LastName = lastName;
@@ -24,14 +23,6 @@ public class Customer {
         this.PostalCode = postalCode;
         this.Phone = phone;
         this.Email = email;
-    }
-
-    public String getCustomer() {
-        return Customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.Customer = customer;
     }
 
     public String getCustomerId() {

@@ -2,6 +2,8 @@ package com.norofff.Task4.controllers;
 
 import com.norofff.Task4.models.Customer;
 import com.norofff.Task4.data_access.CustomerRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,9 +14,12 @@ public class CustomerController {
 
     // Get all customers
     @RequestMapping(value = "/main/Customer", method = RequestMethod.GET)
-    public ArrayList<Customer> getAllCustomers() {
-        return customerRepository.getAllCustomers();
+    public ArrayList<Customer> getAllCustomers(){
+        ArrayList<Customer> customers = customerRepository.getAllCustomers();
+        return customers;
     }
+
+
 
     // Get customer by id
     @RequestMapping(value = "/api/main/Customer/{id}", method = RequestMethod.GET)
@@ -35,8 +40,7 @@ public class CustomerController {
     @RequestMapping(value = "/api/main/Customer", method = RequestMethod.PUT)
     public Boolean updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
         return customerRepository.updateCustomer(customer);
-}
-
+    }
 }
 
 /*    @RequestParam

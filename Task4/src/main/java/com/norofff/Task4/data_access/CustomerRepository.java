@@ -1,9 +1,11 @@
 package com.norofff.Task4.data_access;
 
 import com.norofff.Task4.models.Customer;
+import com.norofff.Task4.models.CustomerCountry;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerRepository {
 
@@ -25,7 +27,6 @@ public class CustomerRepository {
             while (resultSet.next()) {
                 customers.add(
                         new Customer(
-                            resultSet.getString("Customer"),
                             resultSet.getString("CustomerId"),
                             resultSet.getString("FirstName"),
                             resultSet.getString("LastName"),
@@ -36,13 +37,13 @@ public class CustomerRepository {
                         ));
             }
         } catch (Exception exception) {
-
+            System.out.println(exception.getMessage());
         }
         finally {
             try {
                 conn.close();
             } catch(Exception exception) {
-
+                System.out.println(exception.getMessage());
             }
         }
         return customers;
@@ -66,7 +67,6 @@ public class CustomerRepository {
 
             while (resultSet.next()) {
                 customer = new Customer(
-                        resultSet.getString("Customer"),
                         resultSet.getString("CustomerId"),
                         resultSet.getString("FirstName"),
                         resultSet.getString("LastName"),
@@ -83,7 +83,7 @@ public class CustomerRepository {
             try {
                 conn.close();
             } catch (Exception exception) {
-
+                System.out.println(exception.getMessage());
             }
         }
         return customer;
@@ -91,7 +91,7 @@ public class CustomerRepository {
 
     // get customers by country
     public String getCustomerByCountry(String country) {
-        Customer customerByCountry = null;
+        List<CustomerCountry> customersByCountry = new ArrayList<>();
 
         try {
             conn = DriverManager.getConnection(URL);
@@ -102,26 +102,20 @@ public class CustomerRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                customerByCountry = new Customer(
-                        resultSet.getString("country"),
-                        resultSet.getString("perCountry"),
-                        resultSet.getString("FirstName"),
-                        resultSet.getString("LastName"),
+                customersByCountry.add( new CustomerCountry(
                         resultSet.getString("Country"),
-                        resultSet.getString("PostalCode"),
-                        resultSet.getString("Phone"),
-                        resultSet.getString("Email")
+                        resultSet.getInt("perCountry"))
                 );
             }
         }
         catch (Exception exception) {
-
+            System.out.println(exception.getMessage());
         }
         finally {
             try {
                 conn.close();
             } catch (Exception exception) {
-
+                System.out.println(exception.getMessage());
             }
         }
         return country;
@@ -155,13 +149,15 @@ public class CustomerRepository {
             success = (result != 0);
 
         } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+
         }
         finally {
             try {
                 conn.close();
             }
             catch (Exception exception) {
-
+                System.out.println(exception.getMessage());
             }
         }
         return success;
@@ -195,13 +191,13 @@ public class CustomerRepository {
             success = (result != 0);
         }
         catch (Exception exception) {
-
+            System.out.println(exception.getMessage());
         } finally {
             try {
                 conn.close();
             }
             catch (Exception exception) {
-
+                System.out.println(exception.getMessage());
             }
         }
         return success;

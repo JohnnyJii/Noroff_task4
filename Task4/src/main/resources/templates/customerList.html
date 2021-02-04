@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@/css/styles.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="allCust">
+        <tr th:each="customer : ${customerList}">
+            <td th:text="customer : ${customer.getCustomerId()}"></td>
+            <td th:text="customer : ${customer.getFirstName()}"></td>
+            <td th:text="customer : ${customer.getLastName()}"></td>
+            <td th:text="customer : ${customer.getCountry()}"></td>
+            <td th:text="customer : ${customer.getPostalCode}"></td>
+            <td th:text="customer : ${customer.getPhone}"></td>
+            <td th:text="customer : ${customer.getEmail}"></td>
+        </tr>
+    </div>
+</body>
+</html>
