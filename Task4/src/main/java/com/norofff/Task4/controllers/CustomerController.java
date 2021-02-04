@@ -1,7 +1,7 @@
 package com.norofff.Task4.controllers;
 
-import com.norofff.Task4.data_access.CustomerRepository;
 import com.norofff.Task4.models.Customer;
+import com.norofff.Task4.data_access.CustomerRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class CustomerController {
     private CustomerRepository customerRepository = new CustomerRepository();
 
     // Get all customers
-    @RequestMapping(value = "/api/main/Customer", method = RequestMethod.GET)
+    @RequestMapping(value = "/main/Customer", method = RequestMethod.GET)
     public ArrayList<Customer> getAllCustomers() {
         return customerRepository.getAllCustomers();
     }

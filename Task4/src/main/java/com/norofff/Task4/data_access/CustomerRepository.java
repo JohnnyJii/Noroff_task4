@@ -98,7 +98,7 @@ public class CustomerRepository {
             PreparedStatement preparedStatement =
                     conn.prepareStatement(
                             "SELECT Country, COUNT(*) as perCountry  FROM Customer GROUP BY Country ORDER BY perCountry DESC ");
-            preparedStatement.setString(1, country);
+            preparedStatement.setString(Integer.parseInt("1"), country);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
