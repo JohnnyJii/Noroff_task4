@@ -1,6 +1,6 @@
 package com.norofff.Task4.data_access;
 
-import com.norofff.Task4.models.Album;
+import com.norofff.Task4.models.Artist;
 import com.norofff.Task4.models.Genre;
 
 import java.sql.Connection;
@@ -9,28 +9,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class AlbumRepository {
+public class ArtistRepository {
     //Get connection
     private String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;
 
     // Get all tracks
-    public ArrayList<Album> getAllAlbums() {
-        ArrayList<Album> albums = new ArrayList<>();
+    public ArrayList<Artist> getAllArtists() {
+        ArrayList<Artist> artists = new ArrayList<>();
         try {
             conn = DriverManager.getConnection(URL);
             PreparedStatement preparedStatement =
                     conn.prepareStatement("SELECT " +
-                            "AlbumId, " +
-                            "Title " +
+                            "ArtistId, " +
+                            "Name " +
                             "FROM Genre");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                albums.add(
-                        new Album(
-                                resultSet.getString("AlbumId"),
-                                resultSet.getString("Title")
+                artists.add(
+                        new Artist(
+                                resultSet.getString("ArtistId"),
+                                resultSet.getString("Name")
                         ));
             }
         } catch (Exception exception) {
@@ -43,6 +43,6 @@ public class AlbumRepository {
                 System.out.println(exception.getMessage());
             }
         }
-        return albums;
+        return artists;
     }
 }
