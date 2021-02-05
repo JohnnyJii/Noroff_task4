@@ -7,12 +7,24 @@
     <title>Title</title>
 </head>
 <body>
-    <h3> Random artist from the top 5</h3>
+<form action="#" th:action="@{/search}" th:object="${search}" method="get" id="form">
+    <div class="searchBar">
+        <input class="search" type="text" th:field="*{query}" placeholder="Searc track">
+        <button type="submit">Search</button>
+    </div>
+</form>
+<h3>Random artist from the top 5</h3>
     <div th:each="artist:${artists}">
         <p th:text="${artist.getName()}"></p>
-
     </div>
-
+<h3>Random top 5 tracks</h3>
+    <div th:each="track:${tracks}">
+        <p th:text="${track.getName()}"></p>
+    </div>
+<h3>Random top 5 genres</h3>
+    <div th:each="genre:${genres}">
+        <p th:text="${genre.getName()}"></p>
+    </div>
 
 </body>
 </html>

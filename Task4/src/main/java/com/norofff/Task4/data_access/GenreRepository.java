@@ -1,15 +1,22 @@
 package com.norofff.Task4.data_access;
 
 import com.norofff.Task4.models.Genre;
-import com.norofff.Task4.models.Track;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GenreRepository {
+    public List<Genre> getRandomGenres() {
+        ArrayList<Genre> allGenres = getAllGenres();
+        Collections.shuffle(allGenres);
+        return allGenres.subList(0, 5);
+    }
+
     //Get connection
     private String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;

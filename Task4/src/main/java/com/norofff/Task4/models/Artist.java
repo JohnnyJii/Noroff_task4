@@ -5,7 +5,6 @@ public class Artist {
     private String Name;
 
     public Artist() {
-
     }
 
     public Artist(String artistId, String name) {
