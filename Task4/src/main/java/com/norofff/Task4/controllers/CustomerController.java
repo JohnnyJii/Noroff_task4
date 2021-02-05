@@ -19,16 +19,15 @@ public class CustomerController {
         return customers;
     }
 
-    /*
     // Get customer by id
     @RequestMapping(value = "/api/main/Customer/{id}", method = RequestMethod.GET)
-    public Customer getCustomerById(@PathVariable String id) {
+    public Customer getCustomerById(@PathVariable int id) {
         return customerRepository.getCustomerById(id);
 }
-     */
+
 
     // Get customer && country
-    @RequestMapping(value = "/api/main/Customer/{country}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/main/Customer/{country}/country", method = RequestMethod.GET)
     public String getCustomerByCountry(@PathVariable String country)
     {return customerRepository.getCustomerByCountry(country);}
 

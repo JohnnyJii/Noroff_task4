@@ -56,10 +56,9 @@ public class CustomerRepository {
         return customers;
     }
 
-    /*
     // get all customers by id
-    public Customer getCustomerById() {
-        ArrayList<CustomerById> customersById = new ArrayList<>();
+    public Customer getCustomerById(int customerId) {
+        Customer customer = new Customer();
 
         try {
             conn = DriverManager.getConnection(URL);
@@ -74,12 +73,12 @@ public class CustomerRepository {
                             "Email " +
                             "FROM Customer " +
                             "Where customerId = ?");
+            preparedStatement.setInt(1, customerId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                customersById.add(
-                        new CustomerById(
+                customer = new Customer(
                         resultSet.getString("CustomerId"),
                         resultSet.getString("FirstName"),
                         resultSet.getString("LastName"),
@@ -87,11 +86,11 @@ public class CustomerRepository {
                         resultSet.getString("PostalCode"),
                         resultSet.getString("Phone"),
                         resultSet.getString("Email")
-                ));
+                      );
             }
         }
         catch (Exception exception) {
-            System.out.println(exception.getMessage()
+            System.out.println(exception.getMessage());
         }
         finally {
             try {
@@ -103,7 +102,7 @@ public class CustomerRepository {
         return customer;
     }
 
-     */
+
 
     // get customers by country
     public String getCustomerByCountry(String country) {

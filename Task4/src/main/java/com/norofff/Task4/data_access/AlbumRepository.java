@@ -23,7 +23,7 @@ public class AlbumRepository {
                     conn.prepareStatement("SELECT " +
                             "AlbumId, " +
                             "Title " +
-                            "FROM Genre");
+                            "FROM Album");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

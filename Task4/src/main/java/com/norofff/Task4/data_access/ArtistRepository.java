@@ -8,8 +8,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ArtistRepository {
+    public List<Artist> getRandomArtists() {
+        ArrayList<Artist> allArtists = getAllArtists();
+        Collections.shuffle(allArtists);
+        return allArtists.subList(0, 5);
+    }
     //Get connection
     private String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;
@@ -22,8 +29,8 @@ public class ArtistRepository {
             PreparedStatement preparedStatement =
                     conn.prepareStatement("SELECT " +
                             "ArtistId, " +
-                            "Name " +
-                            "FROM Genre");
+                            "[Name] " +
+                            "FROM Artist");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

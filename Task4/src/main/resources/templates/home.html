@@ -8,6 +8,10 @@
 </head>
 <body>
     <h3> Random artist from the top 5</h3>
+    <div th:each="artist:${artists}">
+        <p th:text="${artist.getName()}"></p>
+
+    </div>
 
 
 </body>
