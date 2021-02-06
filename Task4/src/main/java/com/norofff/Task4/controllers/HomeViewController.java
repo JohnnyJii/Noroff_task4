@@ -1,4 +1,4 @@
-package com.norofff.Task4.controllers.api;
+package com.norofff.Task4.controllers;
 
 import com.norofff.Task4.data_access.ArtistRepository;
 import com.norofff.Task4.data_access.GenreRepository;
@@ -20,6 +20,7 @@ public class HomeViewController {
         model.addAttribute("artists", artistRepository.getRandomArtists());
         model.addAttribute("tracks", trackRepository.getRandomTracks());
         model.addAttribute("genres", genreRepository.getRandomGenres());
+        model.addAttribute("search", searchRepository.getTrackByName(null));
         return "home";
     }
 

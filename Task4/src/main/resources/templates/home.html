@@ -9,8 +9,8 @@
 <body>
 <form action="#" th:action="@{/search}" th:object="${search}" method="get" id="form">
     <div class="searchBar">
-        <input class="search" type="text" th:field="*{query}" placeholder="Searc track">
-        <button type="submit">Search</button>
+        <input class="search_input" type="text" th:field="*{query}" id="" name="" placeholder="Search track...">
+        <button type="submit" class="search_icon">Search</button>
     </div>
 </form>
 <h3>Random artist from the top 5</h3>

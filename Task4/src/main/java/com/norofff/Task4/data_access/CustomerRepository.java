@@ -63,7 +63,8 @@ public class CustomerRepository {
         try {
             conn = DriverManager.getConnection(URL);
             PreparedStatement preparedStatement =
-                    conn.prepareStatement("Select " +
+                    conn.prepareStatement(
+                            "Select " +
                             "CustomerId, " +
                             "FirstName, " +
                             "LastName, " +
@@ -184,7 +185,8 @@ public class CustomerRepository {
             conn = DriverManager.getConnection(URL);
 
             PreparedStatement preparedStatement =
-                    conn.prepareStatement("UPDATE Customer SET " +
+                    conn.prepareStatement(
+                            "UPDATE Customer SET " +
                                     "CustomerId = ?," +
                                     "FirstName = ?," +
                                     "LastName = ?," +
@@ -203,6 +205,7 @@ public class CustomerRepository {
             preparedStatement.setString(7, customer.getEmail());
 
             int result = preparedStatement.executeUpdate();
+            preparedStatement.setString(7,customer.getCustomerId());
             success = (result != 0);
         }
         catch (Exception exception) {

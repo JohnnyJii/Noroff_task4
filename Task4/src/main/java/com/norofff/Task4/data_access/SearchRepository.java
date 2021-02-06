@@ -11,17 +11,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class SearchRepository {
-    public List<Track> searchTrackByName() {
-        ArrayList<Track> allTracks = getAllTracks();
-        Collections.shuffle(allTracks);
-        return allTracks.subList(1, 1000);
-    }
-
     private String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;
 
-    public ArrayList<Track> getAllTracks() {
-        ArrayList<Track> tracks = new ArrayList<>();
+    public Track getTrackByName(String name) {
+        Track trackByName = new Track();
+
         try {
             conn = DriverManager.getConnection(URL);
             PreparedStatement preparedStatement =
@@ -34,18 +29,19 @@ public class SearchRepository {
                                     "from Track join Album on Track.AlbumId = Album.AlbumId " +
                                     "join Artist on Artist.ArtistId = Album.ArtistId " +
                                     "join Genre on Genre.GenreId = Track.GenreId = Genre.GenreId " +
-                                    "WHERE UPPER(Track.Name) " +
-                                    "LIKE UPPER(?)");
+                                    "WHERE UPPER(Track.Name) LIKE UPPER(?)");
+            preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
 
+
             while (resultSet.next()) {
-                tracks.add(
-                        new Track(
+                trackByName = new Track(
                                 resultSet.getString("TrackId"),
                                 resultSet.getString("Name")
-                        ));
+                        );
             }
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
         finally {
@@ -55,7 +51,7 @@ public class SearchRepository {
                 System.out.println(exception.getMessage());
             }
         }
-        return tracks;
+        return trackByName;
 
     }
 }

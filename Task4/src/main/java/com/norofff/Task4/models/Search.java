@@ -1,19 +1,16 @@
 package com.norofff.Task4.models;
 
 public class Search {
+    private String query;
 
-    private String Search;
+    public String getQuery() {
 
-    public Search(String search) {
-        this.Search = search;
+        return query;
     }
 
-    public String getSearch() {
-        return Search;
-    }
+    public void setSearch(String query) {
 
-    public void setSearch(String search) {
-        Search = search;
+        this.query = query;
     }
 
 }
