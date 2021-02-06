@@ -7,7 +7,7 @@
 <body>
 <div>
     <h1>Search results</h1>
-    <p th:text="|Your results are: ${query}|"></p>
+    <p th:text="|Your results are: ${search}|"></p>
     <table>
         <thead>
         <tr>
@@ -18,8 +18,8 @@
         </tr>
         </thead>
         <tbody>
-            <tr th:each="info: ${result}">
-                <td th:text="${}"></td>
+            <tr th:each="search: ${results}">
+                <td th:text="search : ${getSearch}"></td>
                 <td th:text=""></td>
                 <td th:text=""></td>
                 <td th:text=""></td>

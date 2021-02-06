@@ -13,14 +13,12 @@ public class HomeViewController {
     public ArtistRepository artistRepository = new ArtistRepository();
     public TrackRepository trackRepository = new TrackRepository();
     public GenreRepository genreRepository = new GenreRepository();
-    public SearchRepository searchRepository = new SearchRepository();
 
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("artists", artistRepository.getRandomArtists());
         model.addAttribute("tracks", trackRepository.getRandomTracks());
         model.addAttribute("genres", genreRepository.getRandomGenres());
-        model.addAttribute("search", searchRepository.getTrackByName(null));
         return "home";
     }
 
