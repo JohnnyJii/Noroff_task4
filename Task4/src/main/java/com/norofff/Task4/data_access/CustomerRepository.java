@@ -156,7 +156,7 @@ public class CustomerRepository {
                                 "as total from Customer " +
                                 "Join Invoice on Customer.CustomerId = Invoice.CustomerId " +
                                 "GROUP BY Customer.CustomerId " +
-                                "ORDER BY total DESC";
+                                "ORDER BY total DESC");
                 preparedStatement.setString(Integer.parseInt("1"), spender);
                 ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
@@ -169,7 +169,7 @@ public class CustomerRepository {
                     resultSet.getString(6),
                     resultSet.getString(7),
                     resultSet.getDouble(8)
-                )));
+                ));
             }
         } catch (Exception e){
             System.out.println(e.getMessage());
@@ -183,7 +183,7 @@ public class CustomerRepository {
         return spender;
     }
 
-    public getCustomerFavGenre(String favorites) {
+    public String getCustomerFavGenre(String favorites) {
         List<FavGenre> favGenres = new ArrayList<>();
         try {
             conn = DriverManager.getConnection(URL);
