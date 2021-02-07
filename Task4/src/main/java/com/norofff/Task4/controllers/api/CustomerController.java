@@ -25,31 +25,38 @@ public class CustomerController {
     public Customer getCustomerById(@PathVariable int id) {
         return customerRepository.getCustomerById(id);
 }
-
-
-@RequestMapping(value = "/api/main/Customer/{name}", method = RequestMethod.GET)
-    public Track getTrackByName(@PathVariable String name) {
-        return searchRepository.getTrackByName(name);
+    // get customer by name
+    @RequestMapping(value = "/api/main/Customer/{name}", method = RequestMethod.GET)
+    public Track getTrackByName(@PathVariable String byName) {
+        return searchRepository.getTrackByName(byName);
     }
 
     // Get customer && country
     @RequestMapping(value = "/api/main/Customer/{country}/country", method = RequestMethod.GET)
-    public String getCustomerByCountry(@PathVariable String country)
-    {return customerRepository.getCustomerByCountry(country);}
+    public String getCustomerByCountry(@PathVariable String country) {
+        return customerRepository.getCustomerByCountry(country);}
 
+    // Get highest spender
+    @RequestMapping(value = "/api/main/Customer/{spender}/spender", method = RequestMethod.GET)
+    public String getHighSpender(@PathVariable String spender) {
+        return customerRepository.getHighSpender(spender);
+    }
+
+    // get favourite gender
+    @RequestMapping(value = "/api/main/Customer/{favorites}/favorite", method = RequestMethod.GET)
+    public String getCustomerFavGenre(@PathVariable String favorites) {
+        return customerRepository.getHighSpender(favorites);
+    }
+
+    // Add customer
     @RequestMapping(value = "/api/main/Customer", method = RequestMethod.POST)
     public Boolean addCustomer(@RequestBody Customer customer) {
         return customerRepository.addCustomer(customer);
 }
-
+    // update customer
     @RequestMapping(value = "/api/main/Customer/{id}", method = RequestMethod.PUT)
     public Boolean updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
         return customerRepository.updateCustomer(customer);
     }
 }
 
-/*    @RequestParam
-    @RequestHeader
-    @PathVariable
-    @RequestBody
-*/

@@ -9,7 +9,7 @@
 <body>
 <form action="#" th:action="@{/search}" th:object="${search}" method="get" id="form">
     <div class="searchBar">
-        <input class="search_input" type="text" th:field="*{query}" id="" name="" placeholder="Search track...">
+        <input class="search_input" type="text" th:field="*{search}" id="" name="" placeholder="Search track...">
         <button type="submit" class="search_icon">Search</button>
     </div>
 </form>

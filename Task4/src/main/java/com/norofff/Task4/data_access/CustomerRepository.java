@@ -75,7 +75,6 @@ public class CustomerRepository {
                             "FROM Customer " +
                             "Where customerId = ?");
             preparedStatement.setInt(1, customerId);
-
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -103,22 +102,23 @@ public class CustomerRepository {
         return customer;
     }
 
-
-
     // get customers by country
     public String getCustomerByCountry(String country) {
         List<CustomerCountry> customersByCountry = new ArrayList<>();
-
         try {
             conn = DriverManager.getConnection(URL);
             PreparedStatement preparedStatement =
                     conn.prepareStatement(
-                            "SELECT Country, COUNT(*) as perCountry  FROM Customer GROUP BY Country ORDER BY perCountry DESC ");
+                            "SELECT Country, " +
+                                    "COUNT(*) as perCountry  " +
+                                    "FROM Customer " +
+                                    "GROUP BY Country " +
+                                    "ORDER BY perCountry DESC ");
             preparedStatement.setString(Integer.parseInt("1"), country);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                customersByCountry.add( new CustomerCountry(
+                customersByCountry.add(new CustomerCountry(
                         resultSet.getString("Country"),
                         resultSet.getInt("perCountry"))
                 );
@@ -135,6 +135,96 @@ public class CustomerRepository {
             }
         }
         return country;
+    }
+
+    // highest spender
+    public String getHighSpender(String spender) {
+        List<HighSpender> highestSpenders = new ArrayList<>();
+        try {
+            conn = DriverManager.getConnection(URL);
+            PreparedStatement preparedStatement =
+                conn.prepareStatement(
+                        "SELECT " +
+                                "Customer.CustomerId, " +
+                                "Customer.FirstName, " +
+                                "Customer.LastName, " +
+                                "Customer.Country, " +
+                                "Customer.PostalCode, " +
+                                "Customer.Phone, " +
+                                "Customer.Email, " +
+                                "round(SUM(Invoice.Total), 2) " +
+                                "as total from Customer " +
+                                "Join Invoice on Customer.CustomerId = Invoice.CustomerId " +
+                                "GROUP BY Customer.CustomerId " +
+                                "ORDER BY total DESC";
+                preparedStatement.setString(Integer.parseInt("1"), spender);
+                ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            highestSpenders.add(new HighSpender (
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getDouble(8)
+                )));
+            }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        return spender;
+    }
+
+    public getCustomerFavGenre(String favorites) {
+        List<FavGenre> favGenres = new ArrayList<>();
+        try {
+            conn = DriverManager.getConnection(URL);
+            PreparedStatement preparedStatement =
+                    conn.prepareStatement(
+                            "SELECT " +
+                                    "Customer.CustomerId," +
+                                    "Customer.FirstName," +
+                                    "Customer.LastName," +
+                                    "Genre.Name," +
+                                    "COUNT(Track.GenreId) total " +
+                                    "FROM Customer " +
+                                    "JOIN Invoice on Customer.CustomerId = Invoice.CustomerId " +
+                                    "JOIN InvoiceLine ON Invoice.InvoiceId = InvoiceLine.InvoiceId " +
+                                    "JOIN Track ON InvoiceLine.TrackId = Track.TrackId " +
+                                    "JOIN Genre ON Track.GenreId = Genre.GenreId " +
+                                    "WHERE Customer.CustomerId " +
+                                    "GROUP BY Genre.GenreId " +
+                                    "ORDER BY total DESC ");
+
+            preparedStatement.setString(Integer.parseInt("1"), favorites);
+            ResultSet rsSet = preparedStatement.executeQuery();
+            while (rsSet.next()) {
+                favGenres.add(new FavGenre(
+                        rsSet.getString("FirstName"),
+                        rsSet.getString("LastName"),
+                        rsSet.getString("Name"),
+                        rsSet.getString("tatal")
+                ));
+            }
+        }
+        catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        return favorites;
     }
 
     public Boolean addCustomer(Customer customer) {
@@ -220,4 +310,6 @@ public class CustomerRepository {
         }
         return success;
     }
+
+
 }

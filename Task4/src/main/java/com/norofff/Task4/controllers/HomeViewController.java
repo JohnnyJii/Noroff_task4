@@ -2,7 +2,6 @@ package com.norofff.Task4.controllers;
 
 import com.norofff.Task4.data_access.ArtistRepository;
 import com.norofff.Task4.data_access.GenreRepository;
-import com.norofff.Task4.data_access.SearchRepository;
 import com.norofff.Task4.data_access.TrackRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

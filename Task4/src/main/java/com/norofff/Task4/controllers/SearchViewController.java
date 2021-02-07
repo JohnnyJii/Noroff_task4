@@ -12,8 +12,9 @@ public class SearchViewController {
 
 
     @GetMapping("/search")
-    public String search(Model model){
-        model.addAttribute("query", searchRepository.getTrackByName());
+    public String index(Model model) {
+        model.addAttribute("Track", searchRepository.getTrackByName());
+        return "search";
     }
 }
 

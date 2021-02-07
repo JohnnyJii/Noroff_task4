@@ -13,15 +13,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class SearchRepository {
-    public List<Track> getTracksByNames() {
-        ArrayList<Track> allNames = getTracksByNames();
-        return allNames;
-    }
     private String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;
 
-    public ArrayList<Track> getTrackByName(String name) {
-        ArrayList<Track> byNames = new ArrayList<>();
+    public Track getTrackByName(String name) {
+        Track byNames = new Track();
         try {
             conn = DriverManager.getConnection(URL);
             PreparedStatement preparedStatement =
@@ -40,7 +36,7 @@ public class SearchRepository {
 
 
             while (resultSet.next()) {
-                trackByName = new Track(
+                byNames = new Track(
                                 resultSet.getString("TrackId"),
                                 resultSet.getString("Name")
                         );
@@ -56,7 +52,7 @@ public class SearchRepository {
                 System.out.println(exception.getMessage());
             }
         }
-        return trackByName;
+        return byNames;
 
     }
 }
