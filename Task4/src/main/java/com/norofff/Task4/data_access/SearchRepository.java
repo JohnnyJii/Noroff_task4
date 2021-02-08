@@ -18,7 +18,7 @@ public class SearchRepository {
     private Connection conn = null;
 
     public SearchResult getTrackByName(String name) {
-        SearchResult searchResult = null;
+        SearchResult searchResult = new SearchResult();
         try {
             conn = DriverManager.getConnection(URL);
             PreparedStatement preparedStatement =

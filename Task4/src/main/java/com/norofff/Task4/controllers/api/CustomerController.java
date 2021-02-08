@@ -3,10 +3,12 @@ package com.norofff.Task4.controllers.api;
 import com.norofff.Task4.data_access.SearchRepository;
 import com.norofff.Task4.models.Customer;
 import com.norofff.Task4.data_access.CustomerRepository;
-import com.norofff.Task4.models.Track;
+import com.norofff.Task4.models.HighSpender;
+import com.norofff.Task4.models.SearchResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CustomerController {
@@ -27,8 +29,8 @@ public class CustomerController {
 }
     // get customer by name
     @RequestMapping(value = "/api/main/Customer/{name}", method = RequestMethod.GET)
-    public Track getTrackByName(@PathVariable String byName) {
-        return searchRepository.getTrackByName(byName);
+    public SearchResult getTrackByName(@PathVariable String searchResult) {
+        return searchRepository.getTrackByName(searchResult);
     }
 
     // Get customer && country
@@ -37,15 +39,15 @@ public class CustomerController {
         return customerRepository.getCustomerByCountry(country);}
 
     // Get highest spender
-    @RequestMapping(value = "/api/main/Customer/{spender}/spender", method = RequestMethod.GET)
-    public String getHighSpender(@PathVariable String spender) {
-        return customerRepository.getHighSpender(spender);
+    @RequestMapping(value = "/api/main/Customer/spender", method = RequestMethod.GET)
+    public List<HighSpender> getHighSpender() {
+        return customerRepository.getHighSpender();
     }
 
     // get favourite gender
     @RequestMapping(value = "/api/main/Customer/{favorites}/favorite", method = RequestMethod.GET)
     public String getCustomerFavGenre(@PathVariable String favorites) {
-        return customerRepository.getHighSpender(favorites);
+        return customerRepository.getCustomerFavGenre(favorites);
     }
 
     // Add customer

@@ -6,6 +6,12 @@
 </head>
 <body>
 <div>
+    <form action="#" th:action="@{/search}" th:object="${searchResult}" method="post">
+    <div class="searchBar">
+        <input class="search_input" type="text" th:field="*{search}" id="" name="" placeholder="Search track...">
+        <button type="submit" class="search_icon">Search</button>
+    </div>
+    </form>
     <h1>Search results</h1>
     <p th:text="|Your results are: ${searchResult.getSearch()}|"></p>
     <table>

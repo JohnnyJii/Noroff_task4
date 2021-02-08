@@ -6,6 +6,9 @@ public class Search {
     public SearchResult getSearchResult() {
         return searchResult;
     }
+    public Search() {
+        this.searchResult = new SearchResult();
+    }
 
     public void setSearchResult(SearchResult searchResult) {
         this.searchResult = searchResult;
