@@ -1,7 +1,6 @@
 package com.norofff.Task4.data_access;
 
 import com.norofff.Task4.models.Album;
-import com.norofff.Task4.models.Genre;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

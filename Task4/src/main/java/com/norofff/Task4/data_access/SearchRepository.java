@@ -1,17 +1,11 @@
 package com.norofff.Task4.data_access;
 
-import com.norofff.Task4.models.Search;
 import com.norofff.Task4.models.SearchResult;
-import com.norofff.Task4.models.Track;
 
-import javax.naming.Name;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class SearchRepository {
     private String URL = ConnectionHelper.CONNECTION_URL;

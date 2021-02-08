@@ -231,7 +231,6 @@ public class CustomerRepository {
         Boolean success = false;
         try{
             conn = DriverManager.getConnection(URL);
-
             PreparedStatement preparedStatement =
                     conn.prepareStatement(
                             "Insert Into customer(" +
@@ -310,6 +309,4 @@ public class CustomerRepository {
         }
         return success;
     }
-
-
 }
