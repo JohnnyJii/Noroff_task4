@@ -3,6 +3,16 @@ package com.norofff.Task4.models;
 public class Search {
     private String search;
 
+    public SearchResult getSearchResult() {
+        return searchResult;
+    }
+
+    public void setSearchResult(SearchResult searchResult) {
+        this.searchResult = searchResult;
+    }
+
+    private SearchResult searchResult;
+
     public String getSearch() {
         return search;
     }

@@ -7,7 +7,7 @@
 <body>
 <div>
     <h1>Search results</h1>
-    <p th:text="|Your results are: ${search}|"></p>
+    <p th:text="|Your results are: ${searchResult.getSearch()}|"></p>
     <table>
         <thead>
         <tr>
@@ -18,11 +18,11 @@
         </tr>
         </thead>
         <tbody>
-            <tr th:each="search: ${results}">
-                <td th:text="search : ${getSearch}"></td>
-                <td th:text=""></td>
-                <td th:text=""></td>
-                <td th:text=""></td>
+            <tr>
+                <td th:text="${searchResult.getSearchResult().getArtist()}"></td>
+                <td th:text="${searchResult.getSearchResult().getAlbum()}"></td>
+                <td th:text="${searchResult.getSearchResult().getTrack()}"></td>
+                <td th:text="${searchResult.getSearchResult().getGenre()}"></td>
             </tr>
         </tbody>
     </table>

@@ -6,11 +6,16 @@ public class SearchResult {
     private String album;
     private String genre;
 
+    public SearchResult() {
+
+    }
+
     public SearchResult(String track, String artist, String album, String genre) {
         this.track = track;
         this.artist = artist;
         this.album = album;
         this.genre = genre;
+
     }
     public String getTrack() {
         return track;

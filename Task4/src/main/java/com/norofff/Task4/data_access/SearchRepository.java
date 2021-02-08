@@ -1,6 +1,7 @@
 package com.norofff.Task4.data_access;
 
 import com.norofff.Task4.models.Search;
+import com.norofff.Task4.models.SearchResult;
 import com.norofff.Task4.models.Track;
 
 import javax.naming.Name;
@@ -16,8 +17,8 @@ public class SearchRepository {
     private String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;
 
-    public Track getTrackByName(String name) {
-        Track byNames = new Track();
+    public SearchResult getTrackByName(String name) {
+        SearchResult searchResult = null;
         try {
             conn = DriverManager.getConnection(URL);
             PreparedStatement preparedStatement =
@@ -36,9 +37,11 @@ public class SearchRepository {
 
 
             while (resultSet.next()) {
-                byNames = new Track(
-                                resultSet.getString("TrackId"),
-                                resultSet.getString("Name")
+                searchResult = new SearchResult(
+                                resultSet.getString("track"),
+                                resultSet.getString("artist"),
+                                resultSet.getString("album"),
+                                resultSet.getString("genre")
                         );
             }
         }
@@ -52,7 +55,7 @@ public class SearchRepository {
                 System.out.println(exception.getMessage());
             }
         }
-        return byNames;
+        return searchResult;
 
     }
 }
