@@ -105,6 +105,42 @@ public class CustomerRepository {
     }
 
     // get customers by country
+    public String getCustomerByCountry(String country) {
+        List<CustomerCountry> customersByCountry = new ArrayList<>();
+        try {
+            conn = DriverManager.getConnection(URL);
+            PreparedStatement preparedStatement =
+                    conn.prepareStatement(
+                            "SELECT Country, " +
+                                    "COUNT(*) as perCountry  " +
+                                    "FROM Customer " +
+                                    "GROUP BY Country " +
+                                    "ORDER BY perCountry DESC ");
+            preparedStatement.setString(Integer.parseInt("1"), country);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                customersByCountry.add(new CustomerCountry(
+                        resultSet.getString("Country"),
+                        resultSet.getInt("perCountry"))
+                );
+            }
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+        finally {
+            try {
+                conn.close();
+            } catch (Exception exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
+        return country;
+    }
+
+
+    //Get highest spenders
     public List<HighSpender> getHighSpender() {
         List<HighSpender> highestSpenders = new ArrayList<>();
         try {
